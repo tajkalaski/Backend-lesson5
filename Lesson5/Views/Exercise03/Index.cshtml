@@ -1,0 +1,32 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@using Lesson5.Models;
+@model BreakfastOrder
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Breakfast order</title>
+</head>
+<body>
+    <h1>Breakfast Order</h1>
+    <form asp-controller="Exercise03" asp-action="Index">
+        <p><label asp-for="Fullname">Your name:</label> <input asp-for="Fullname" /></p>
+        <p><label asp-for="RoomNumber">Room number:</label> <input asp-for="RoomNumber" /></p>
+        <p>
+            <b>What would you like to eat for breakfast?</b><br /><br />
+            @for (int i = 0; i < Model.BreakfastFoods.Count(); i++)
+            {
+                <input asp-for="@Model.BreakfastFoods[i].Selected" type="checkbox" />
+                <label asp-for="@Model.BreakfastFoods[i].Selected">@Model.BreakfastFoods[i].Name</label>
+                <input asp-for="@Model.BreakfastFoods[i].BreakfastFoodId" type="hidden" />
+                <input asp-for="@Model.BreakfastFoods[i].Name" type="hidden" />
+                <input asp-for="@Model.BreakfastFoods[i].Price" type="hidden" />
+                <br />
+            }
+        </p>
+        <p><label asp-for="Delivery">When:</label> <input type="datetime" asp-for="Delivery" /></p>
+        <p><input type="submit" value="Order" /></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿
+@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@using Lesson5.Models;
+@model BreakfastOrder
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Breakfast order</title>
+</head>
+<body>
+    <h1>Your breakfast Order</h1>
+    <p>Hello @Model.Fullname!</p>
+    <p>
+        You ordered: <br />
+        <ul>
+            @{ decimal total = 0M;}
+            @foreach (BreakfastFood food in Model.BreakfastFoods)
+            {
+                @if (food.Selected == true)
+                {
+                    <li>@food.Name - kr. @food.Price.ToString("0.00")</li>
+                    total += @food.Price;
+                }
+            }
+        </ul>
+    </p>
+    <p>Total price: kr. @total.ToString("0.00")</p>
+    <p>Your order will be prepared and delivered to room number @Model.RoomNumber, @Model.Delivery.ToString("dddd, dd MMMM yyyy HH:mm")</p>
+
+</body>
+</html>
